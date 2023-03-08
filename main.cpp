@@ -12,6 +12,7 @@ void printRatings(vector<string> bl, map<string, vector<double> > rm);          
 vector<pair<double, string> > average(vector<string> bl, map<string, vector<double> > rm);                                      // returns the average rating of every book
 vector<pair<double, string> > similarities(string user, map<string, vector<double> > rm);                                       // vector of how similar each person is to user with dot product
 vector<pair<double, string> > averageSim(vector<string> bl, vector<pair<double, string> > sim, map<string, vector<double> > rm); // average ratings of top 3 similar users to return book list
+string removeWs (string line);
 
 int main(int argc, char *argv[])
 {
@@ -35,8 +36,8 @@ int main(int argc, char *argv[])
     int count = 1;
     while (getline(inputFile, line))
     {
-        if (count % 3 == 2)
-        { // only lines books are on
+        line = removeWs(line);
+        if (count % 3 == 2){ // only lines books are on
             bookSet.insert(line);
         }
         count++;
@@ -56,6 +57,10 @@ int main(int argc, char *argv[])
     {
         getline(inputFile, book);
         getline(inputFile, ratingStr);
+        name = removeWs(name);
+        book = removeWs(book);
+        ratingStr = removeWs(ratingStr);
+
         rating = stod(ratingStr); // string to double 
 
         if (ratingsMap.count(name) == 0) // if the name is not in the map, add the name and a vector of 0s size of bookList
@@ -196,4 +201,14 @@ vector<pair<double, string> > averageSim(vector<string> bl, vector<pair<double, 
     }
     sort(avgSimList.rbegin(), avgSimList.rend()); // sort highest first
     return avgSimList;
+}
+
+string removeWs (string line){
+    /*if (line[line.length() - 1] == '\r'){
+        line.erase(line.length() - 1);
+    }*/
+    line.erase(remove_if(line.begin(), line.end(),[](char c) {
+        return (c == ' ' || c == '\n' || c == '\r' ||c == '\t' || c == '\v' || c == '\f');}),
+        line.end());
+    return line;
 }
