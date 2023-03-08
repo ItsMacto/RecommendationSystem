@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
             {
                 for (auto const &[rating, book] : ratingAverage) // print
                 {
-                    cout << book << " " << rating << endl;
+                    cout << book << " "  <<rating << endl;
                 }
             }
             else 
@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
                 {
                     if (rating > 0)
                     {
-                        cout << book << " " << rating << endl;
+                        cout << book << " " <<rating << endl;
                     }
                 }
             }

@@ -12,6 +12,9 @@
         "string": "cpp",
         "string_view": "cpp",
         "unordered_map": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "ostream": "cpp",
+        "iomanip": "cpp",
+        "ios": "cpp"
     }
 }
